@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User{
+  id String    @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  name String?
+  password String
+  salt String
+
+  createdAt DateTime @default(now())
+
+  exercises Exercise[]
+}
+
+model Exercise{
+  id String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  reps          Int
+  weight        Int
+  sets          Int
+  days          String
+  done          Boolean?  @default(false)
+
+  userId       String     @db.ObjectId
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+}
