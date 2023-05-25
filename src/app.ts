@@ -1,5 +1,5 @@
 import fastify from "fastify";
-import UserRoute from "./modules/users/users.route";
+import UserRoute from "./auth/user.route";
 
 const server =  fastify();
 
