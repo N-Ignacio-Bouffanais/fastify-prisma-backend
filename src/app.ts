@@ -12,6 +12,7 @@ async function main(){
             port: 3000,
             host: '0.0.0.0'
         });
+        console.log("Server listening on port 3000")
     } catch (e) {
         console.log("Error starting server:", e);
         process.exit(1);
