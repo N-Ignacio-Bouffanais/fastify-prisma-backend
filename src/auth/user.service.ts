@@ -1,6 +1,6 @@
 import { hashPassword } from "../utils/hash";
 import { prisma } from "../utils/prisma";
-import { CreateUserInput } from "./user.schema";
+import { CreateUserInput, LoginInput } from "./user.schema";
 
 export async function CreateUser(input: CreateUserInput) {
 
@@ -13,4 +13,8 @@ export async function CreateUser(input: CreateUserInput) {
   return user;
 }
 
-export async function LoginUser(){}
+export async function FindUserByEmail(input: LoginInput) {
+  return await prisma.user.findUnique({
+    where: { email: input.email },
+  });
+}
